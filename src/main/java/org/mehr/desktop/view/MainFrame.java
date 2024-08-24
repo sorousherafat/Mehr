@@ -1,18 +1,22 @@
 package org.mehr.desktop.view;
 
-import org.mehr.desktop.controller.MainController;
+import org.mehr.desktop.controller.IDController;
+import org.mehr.desktop.controller.StockController;
+import org.mehr.desktop.view.id.IDButton;
+import org.mehr.desktop.view.stock.StockButton;
 
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
     private final JPanel panel = new JPanel();
-    private final OpenButton openButton = new OpenButton();
-    private final ProgressBar progressBar = new ProgressBar();
+    private final StockButton stockButton = new StockButton();
+    private final IDButton idButton = new IDButton();
 
     public MainFrame() {
         super("Mehr");
 
-        new MainController(openButton, progressBar);
+        new StockController(stockButton);
+        new IDController(idButton);
 
         addComponents();
         config();
@@ -26,8 +30,8 @@ public class MainFrame extends JFrame {
     }
 
     private void addComponents() {
-        panel.add(openButton);
-        panel.add(progressBar);
+        panel.add(stockButton);
+        panel.add(idButton);
         add(panel);
     }
 }

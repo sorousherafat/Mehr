@@ -1,33 +1,24 @@
 package org.mehr.desktop.model.xls;
 
-import org.apache.poi.hssf.eventusermodel.HSSFEventFactory;
-import org.apache.poi.hssf.eventusermodel.HSSFRequest;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.IOException;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-public class XLSFileConsumer implements Consumer<File> {
+public abstract class XLSFileConsumer<T> implements Consumer<File> {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
+
+    protected XLSFileReader<T> reader;
+    protected Consumer<List<T>> consumer;
 
     @Override
     public void accept(File file) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
-            POIFSFileSystem fileSystem = new POIFSFileSystem(fileInputStream);
-            InputStream documentInputStream = fileSystem.createDocumentInputStream("Workbook");
-            HSSFRequest request = new HSSFRequest();
-            XLSListener listener = new XLSListener();
-            request.addListener(listener, XLSListener.sid);
-            HSSFEventFactory factory = new HSSFEventFactory();
-            factory.processEvents(request, documentInputStream);
-            System.out.printf("total rows: %d\n", listener.getRowCount());
-        } catch (Exception e) {
-            logger.severe(e.toString());
-            System.exit(1);
+            List<T> list = reader.read(file);
+            consumer.accept(list);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

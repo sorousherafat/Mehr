@@ -1,16 +1,16 @@
-package org.mehr.desktop.view;
+package org.mehr.desktop.view.base;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-public class FileChooser extends JFileChooser {
-    public FileChooser() {
+public abstract class XLSFileChooser extends JFileChooser {
+    public XLSFileChooser(String dialogTitle) {
         super(FileSystemView.getFileSystemView());
         FileFilter filter = new FileNameExtensionFilter("XLS Excel files", "xls");
         this.setFileFilter(filter);
-        this.setDialogTitle("Choose the exported .xls file");
+        this.setDialogTitle(dialogTitle);
     }
 
     public int showOpenDialog() {
