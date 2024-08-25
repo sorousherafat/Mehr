@@ -1,31 +1,21 @@
-package org.mehr.desktop.model.database;
+package org.mehr.desktop.model.repositories;
 
 import org.mehr.desktop.model.id.IDRecord;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-public class Database {
-    private static final Logger logger = Logger.getLogger(Database.class.getName());
-
-    private static final String url = "jdbc:sqlite:mehr.db";
-
-    public Database() throws SQLException {
-        createTablesIfNotExist();
+public class IDRepository extends Repository {
+    public IDRepository() throws SQLException {
     }
 
-    private Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(url);
-    }
-
-    private void createTablesIfNotExist() throws SQLException {
-        String query = "CREATE TABLE IF NOT EXISTS ids (code VARCHAR(256), portal VARCHAR(256))";
-
-        try (Connection connection = createConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.executeUpdate();
-        }
+    @Override
+    String createTableQuery() {
+        return "CREATE TABLE IF NOT EXISTS ids (code VARCHAR(256) UNIQUE, portal VARCHAR(256) UNIQUE)";
     }
 
     public List<IDRecord> readIDs() throws SQLException {

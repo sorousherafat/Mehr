@@ -1,8 +1,7 @@
 package org.mehr.desktop.model.id;
 
-import org.mehr.desktop.model.database.Database;
+import org.mehr.desktop.model.repositories.IDRepository;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
@@ -14,7 +13,7 @@ public class IDRecordsConsumer implements Consumer<List<IDRecord>> {
     @Override
     public void accept(List<IDRecord> records) {
         try {
-            Database database = new Database();
+            IDRepository database = new IDRepository();
             database.replaceIDs(records);
         } catch (SQLException e) {
             throw new RuntimeException(e);
