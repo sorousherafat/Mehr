@@ -1,6 +1,6 @@
 package org.mehr.desktop.model.repositories;
 
-import org.mehr.desktop.model.id.IDRecord;
+import org.mehr.desktop.model.entities.ID;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,8 +18,8 @@ public class IDRepository extends Repository {
         return "CREATE TABLE IF NOT EXISTS ids (code VARCHAR(256) UNIQUE, portal VARCHAR(256) UNIQUE)";
     }
 
-    public List<IDRecord> readIDs() throws SQLException {
-        List<IDRecord> records = new ArrayList<>();
+    public List<ID> readIDs() throws SQLException {
+        List<ID> records = new ArrayList<>();
 
         String query = "SELECT (code, portal) FROM ids";
 
@@ -27,14 +27,14 @@ public class IDRepository extends Repository {
             while (resultSet.next()) {
                 String code = resultSet.getString("code");
                 String portal = resultSet.getString("portal");
-                records.add(new IDRecord(code, portal));
+                records.add(new ID(code, portal));
             }
         }
 
         return records;
     }
 
-    public void replaceIDs(List<IDRecord> records) throws SQLException {
+    public void replaceIDs(List<ID> records) throws SQLException {
         try (Connection connection = createConnection()) {
             connection.setAutoCommit(false);
 
@@ -53,11 +53,11 @@ public class IDRepository extends Repository {
         }
     }
 
-    private void insertIDs(Connection connection, List<IDRecord> records) throws SQLException {
+    private void insertIDs(Connection connection, List<ID> records) throws SQLException {
         String query = "INSERT INTO ids (code, portal) VALUES (?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            for (IDRecord record : records) {
+            for (ID record : records) {
                 statement.setString(1, record.getCode());
                 statement.setString(2, record.getPortal());
                 statement.addBatch();

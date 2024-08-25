@@ -1,6 +1,6 @@
 package org.mehr.desktop.controller;
 
-import org.mehr.desktop.model.id.IDFileConsumer;
+import org.mehr.desktop.model.consumers.IDFileConsumer;
 import org.mehr.desktop.view.base.OpenXLSFileChooserActionListener;
 import org.mehr.desktop.view.id.IDButton;
 import org.mehr.desktop.view.id.OpenIDFileChooserActionListener;

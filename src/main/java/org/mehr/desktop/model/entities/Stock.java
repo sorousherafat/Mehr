@@ -1,13 +1,13 @@
-package org.mehr.desktop.model.stock;
+package org.mehr.desktop.model.entities;
 
 import java.util.Objects;
 
-public final class StockRecord {
+public final class Stock {
     private final String code;
     private final String name;
     private final int stock;
 
-    public StockRecord(String code, String name, int stock) {
+    public Stock(String code, String name, int stock) {
         this.code = code;
         this.name = name;
         this.stock = stock;
@@ -29,7 +29,7 @@ public final class StockRecord {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        StockRecord that = (StockRecord) obj;
+        Stock that = (Stock) obj;
         return Objects.equals(this.code, that.code) &&
                 Objects.equals(this.name, that.name) &&
                 this.stock == that.stock;

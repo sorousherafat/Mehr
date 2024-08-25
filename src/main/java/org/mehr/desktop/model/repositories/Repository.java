@@ -8,11 +8,11 @@ import java.sql.SQLException;
 public abstract class Repository {
     private static final String url = "jdbc:sqlite:mehr.db";
 
-    abstract String createTableQuery();
-
     public Repository() throws SQLException {
         createTablesIfNotExist();
     }
+
+    abstract String createTableQuery();
 
     Connection createConnection() throws SQLException {
         return DriverManager.getConnection(url);

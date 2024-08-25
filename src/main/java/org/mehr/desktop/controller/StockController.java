@@ -1,6 +1,6 @@
 package org.mehr.desktop.controller;
 
-import org.mehr.desktop.model.stock.StockFileConsumer;
+import org.mehr.desktop.model.consumers.StockFileConsumer;
 import org.mehr.desktop.view.base.OpenXLSFileChooserActionListener;
 import org.mehr.desktop.view.stock.OpenStockFileChooserActionListener;
 import org.mehr.desktop.view.stock.StockButton;

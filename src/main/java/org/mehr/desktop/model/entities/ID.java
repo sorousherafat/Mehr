@@ -1,12 +1,12 @@
-package org.mehr.desktop.model.id;
+package org.mehr.desktop.model.entities;
 
 import java.util.Objects;
 
-public final class IDRecord {
+public final class ID {
     private final String code;
     private final String portal;
 
-    public IDRecord(String code, String portal) {
+    public ID(String code, String portal) {
         this.code = code;
         this.portal = portal;
     }
@@ -23,7 +23,7 @@ public final class IDRecord {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        IDRecord that = (IDRecord) obj;
+        ID that = (ID) obj;
         return Objects.equals(this.code, that.code) &&
                 Objects.equals(this.portal, that.portal);
     }
