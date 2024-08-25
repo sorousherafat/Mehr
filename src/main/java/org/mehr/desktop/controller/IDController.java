@@ -7,12 +7,10 @@ import org.mehr.desktop.view.id.OpenIDFileChooserActionListener;
 
 public class IDController {
     private final IDButton idButton;
-
     private final OpenXLSFileChooserActionListener openFileChooserActionListener;
 
     public IDController(IDButton idButton) {
         this.idButton = idButton;
-
         this.openFileChooserActionListener = new OpenIDFileChooserActionListener((fileChooser) -> new IDFileConsumer().accept(fileChooser.getSelectedFile()));
 
         addActionListeners();

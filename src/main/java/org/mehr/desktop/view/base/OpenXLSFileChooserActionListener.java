@@ -17,7 +17,7 @@ public abstract class OpenXLSFileChooserActionListener implements ActionListener
     public void actionPerformed(ActionEvent actionEvent) {
         int result = fileChooser.showOpenDialog();
         if (result == XLSFileChooser.APPROVE_OPTION) {
-            Thread thread = new Thread(() -> consumer.accept(fileChooser), "Worker");
+            Thread thread = new Thread(() -> consumer.accept(fileChooser));
             thread.start();
         }
     }
