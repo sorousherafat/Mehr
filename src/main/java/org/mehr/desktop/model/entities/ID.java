@@ -24,8 +24,7 @@ public final class ID {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         ID that = (ID) obj;
-        return Objects.equals(this.code, that.code) &&
-                Objects.equals(this.portal, that.portal);
+        return Objects.equals(this.code, that.code) && Objects.equals(this.portal, that.portal);
     }
 
     @Override
@@ -35,9 +34,7 @@ public final class ID {
 
     @Override
     public String toString() {
-        return "IDRecord[" +
-                "topThreeCode=" + code + ", " +
-                "portalCode=" + portal + ']';
+        return "IDRecord[" + "code=" + code + ", portal=" + portal + ']';
     }
 
 

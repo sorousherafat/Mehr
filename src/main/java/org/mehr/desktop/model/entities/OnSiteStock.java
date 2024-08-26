@@ -2,12 +2,12 @@ package org.mehr.desktop.model.entities;
 
 import java.util.Objects;
 
-public final class Stock {
+public final class OnSiteStock {
     private final String code;
     private final String name;
     private final int stock;
 
-    public Stock(String code, String name, int stock) {
+    public OnSiteStock(String code, String name, int stock) {
         this.code = code;
         this.name = name;
         this.stock = stock;
@@ -29,10 +29,8 @@ public final class Stock {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        Stock that = (Stock) obj;
-        return Objects.equals(this.code, that.code) &&
-                Objects.equals(this.name, that.name) &&
-                this.stock == that.stock;
+        OnSiteStock that = (OnSiteStock) obj;
+        return Objects.equals(this.code, that.code) && Objects.equals(this.name, that.name) && this.stock == that.stock;
     }
 
     @Override
@@ -42,9 +40,6 @@ public final class Stock {
 
     @Override
     public String toString() {
-        return "StockRecord[" +
-                "code=" + code + ", " +
-                "name=" + name + ", " +
-                "stock=" + stock + ']';
+        return "StockRecord[" + "code=" + code + ", name=" + name + ", stock=" + stock + ']';
     }
 }
