@@ -2,8 +2,8 @@ package org.mehr.desktop.view;
 
 import org.mehr.desktop.controller.IDController;
 import org.mehr.desktop.controller.StockController;
-import org.mehr.desktop.view.id.IDButton;
-import org.mehr.desktop.view.stock.StockButton;
+import org.mehr.desktop.view.buttons.IDButton;
+import org.mehr.desktop.view.buttons.StockButton;
 
 import javax.swing.*;
 

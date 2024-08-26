@@ -1,24 +1,23 @@
 package org.mehr.desktop.controller;
 
-import org.mehr.desktop.model.consumers.StockFileConsumer;
-import org.mehr.desktop.view.base.OpenXLSFileChooserActionListener;
-import org.mehr.desktop.view.stock.OpenStockFileChooserActionListener;
-import org.mehr.desktop.view.stock.StockButton;
+import org.mehr.desktop.controller.listeners.OpenFileActionListener;
+import org.mehr.desktop.controller.listeners.OpenStockActionListener;
+import org.mehr.desktop.view.buttons.StockButton;
 
 public class StockController {
-    private final StockButton stockButton;
+    private final StockButton button;
 
-    private final OpenXLSFileChooserActionListener openFileChooserActionListener;
+    private final OpenFileActionListener openFileActionListener;
 
-    public StockController(StockButton stockButton) {
-        this.stockButton = stockButton;
+    public StockController(StockButton button) {
+        this.button = button;
 
-        this.openFileChooserActionListener = new OpenStockFileChooserActionListener((fileChooser) -> new StockFileConsumer().accept(fileChooser.getSelectedFile()));
+        this.openFileActionListener = new OpenStockActionListener();
 
         addActionListeners();
     }
 
     private void addActionListeners() {
-        stockButton.addActionListener(openFileChooserActionListener);
+        button.addActionListener(openFileActionListener);
     }
 }

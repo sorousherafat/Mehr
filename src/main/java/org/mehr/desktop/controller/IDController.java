@@ -1,22 +1,21 @@
 package org.mehr.desktop.controller;
 
-import org.mehr.desktop.model.consumers.IDFileConsumer;
-import org.mehr.desktop.view.base.OpenXLSFileChooserActionListener;
-import org.mehr.desktop.view.id.IDButton;
-import org.mehr.desktop.view.id.OpenIDFileChooserActionListener;
+import org.mehr.desktop.controller.listeners.OpenFileActionListener;
+import org.mehr.desktop.controller.listeners.OpenIDActionListener;
+import org.mehr.desktop.view.buttons.IDButton;
 
 public class IDController {
-    private final IDButton idButton;
-    private final OpenXLSFileChooserActionListener openFileChooserActionListener;
+    private final IDButton button;
+    private final OpenFileActionListener openFileActionListener;
 
-    public IDController(IDButton idButton) {
-        this.idButton = idButton;
-        this.openFileChooserActionListener = new OpenIDFileChooserActionListener((fileChooser) -> new IDFileConsumer().accept(fileChooser.getSelectedFile()));
+    public IDController(IDButton button) {
+        this.button = button;
+        this.openFileActionListener = new OpenIDActionListener();
 
         addActionListeners();
     }
 
     private void addActionListeners() {
-        idButton.addActionListener(openFileChooserActionListener);
+        button.addActionListener(openFileActionListener);
     }
 }

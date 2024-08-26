@@ -1,4 +1,4 @@
-package org.mehr.desktop.view.stock;
+package org.mehr.desktop.view.buttons;
 
 import javax.swing.*;
 
