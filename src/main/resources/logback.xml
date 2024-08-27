@@ -5,7 +5,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.apache" level="warn" />
+    <logger name="org.apache" level="warn"/>
 
     <root level="debug">
         <appender-ref ref="STDOUT"/>

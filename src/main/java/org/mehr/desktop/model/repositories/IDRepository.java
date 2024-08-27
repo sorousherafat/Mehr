@@ -6,8 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class IDRepository extends Repository {
     public IDRepository() throws SQLException {
@@ -18,16 +19,16 @@ public class IDRepository extends Repository {
         return "CREATE TABLE IF NOT EXISTS ids (code VARCHAR(256) UNIQUE, portal VARCHAR(256) UNIQUE)";
     }
 
-    public List<ID> readIDs() throws SQLException {
-        List<ID> records = new ArrayList<>();
+    public Map<String, String> readIDs() throws SQLException {
+        Map<String, String> records = new HashMap<>();
 
-        String query = "SELECT (code, portal) FROM ids";
+        String query = "SELECT code, portal FROM ids";
 
         try (Connection connection = createConnection(); PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 String code = resultSet.getString("code");
                 String portal = resultSet.getString("portal");
-                records.add(new ID(code, portal));
+                records.put(code, portal);
             }
         }
 

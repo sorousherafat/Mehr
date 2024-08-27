@@ -17,6 +17,10 @@ public final class OnlineStock {
         return id;
     }
 
+    public String getIdString() {
+        return String.valueOf(id);
+    }
+
     public String getTitle() {
         return title;
     }

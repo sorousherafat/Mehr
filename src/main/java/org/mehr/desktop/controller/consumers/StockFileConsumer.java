@@ -1,15 +1,14 @@
 package org.mehr.desktop.controller.consumers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.mehr.desktop.model.api.PortalAPI;
 import org.mehr.desktop.model.entities.OnSiteStock;
 import org.mehr.desktop.model.entities.OnlineStock;
+import org.mehr.desktop.model.functions.ChangedStockFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Map;
 
 public class StockFileConsumer extends XLSFileConsumer<OnSiteStock> {
     private static final Logger logger = LoggerFactory.getLogger(StockFileConsumer.class);
@@ -24,19 +23,17 @@ public class StockFileConsumer extends XLSFileConsumer<OnSiteStock> {
         };
 
         consumer = records -> {
-            try {
-                consume(records);
-            } catch (ExecutionException | InterruptedException | JsonProcessingException | URISyntaxException e) {
+            try (PortalAPI api = new PortalAPI()) {
+                Map<String, OnlineStock> onlineStocks = api.getStocks();
+                logger.info("Retrieved {} stocks.", onlineStocks.size());
+                ChangedStockFinder changedStockFinder = new ChangedStockFinder();
+                List<OnlineStock> changedStock = changedStockFinder.apply(records, onlineStocks);
+                logger.info("{} out of {} stocks were changed after importing {} records.", changedStock.size(), onlineStocks.size(), records.size());
+                api.updateStocks(changedStock);
+                logger.info("Updated all stock.");
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         };
-    }
-
-    private void consume(List<OnSiteStock> records) throws ExecutionException, InterruptedException, JsonProcessingException, URISyntaxException {
-        List<OnlineStock> stocks;
-        try (PortalAPI api = new PortalAPI()) {
-            stocks = api.getStocks();
-        }
-        logger.info("Retrieved {} stocks.", stocks.size());
     }
 }
